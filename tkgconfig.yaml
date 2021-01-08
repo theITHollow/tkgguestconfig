@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tkgconfig
+spec:
+  containers:
+  - image: eshanks16/clusterconfig:v5
+    name: clusterconfig
+    command: [ "/bin/bash", "-c", "--"]
+    args: ["/clusterconfig.sh -s utility -g utilitycluster -r
+    containerd"]
+    volumeMounts:
+      - name: tanzuconfigs
+        mountPath: "/tanzuconfigs"
+  initContainers:
+  - image: "eshanks16/vlogin:v17"
+    name: login
+    command: [ "/bin/bash", "-c", "--"]
+    args: ["/newlogin.sh -s sup.hollow.local -u tanzu -p Test123 -n utility -c utilitycluster"]
+    volumeMounts:
+      - name: tanzuconfigs
+        mountPath: "/tanzuconfigs"
+  volumes:
+    - name: tanzuconfigs
+      emptyDir: {}
