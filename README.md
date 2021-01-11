@@ -31,4 +31,15 @@ This project uses two containers.
 
 4. Update the tkgconfig.yaml file with the appropriate images and the arguments.
 
+-- Arguments
+-  s, --sup == supervisor cluster endpoint
+- u, --user == user
+- p, --pass == password
+- n, --namespace == supervisor namespace
+- g, --guestcluster == guest cluster
+- l, --local == local file (for copy purposes)
+- d, --destination == remote file location (for copy purposes)
+- c, --capath == certificate authority path
+- r, --restart == restart a system service
+
 5. Deploy the script to a supervisor cluster.

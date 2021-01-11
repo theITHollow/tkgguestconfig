@@ -29,11 +29,11 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
       shift; destination=$1
       ;;
 
-    -g| --gcname )
+    -g| --guestcluster )
       shift; gcname=$1
       ;;
 
-    -s| --svnamespace )
+    -n| --namespace )
       shift; svnamespace=$1
       ;;
 
