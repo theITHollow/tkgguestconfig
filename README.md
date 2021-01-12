@@ -25,10 +25,28 @@ This project uses two containers.
 1. Obtain the latest version of the linux kubectl-vsphere plugin from your
    Supervisor cluster and place it in the vlogins folder.
 
-2. Build the vlogins container and push it to an available image registry.
+2. Update the `docker-compose.yml` file with the image registry being used to
+   store repos. You can do this by replacing the [IMAGE_REGISTRY_GOES_HERE]
+   variable with your repo.
+   
+   > Note: remove the brackets [].
 
-3. Build the clusterconfig container and push it to an available image registry.
+3. Build the docker images using the `docker-compose.yml` file by running.
 
-4. Update the tkgconfig.yaml file with the appropriate images and the arguments.
+``` 
+docker compose build
+```
 
-5. Deploy the script to a supervisor cluster.
+4. Push the images to your container registry by running.
+
+``` 
+docker compose push
+```
+
+5. Update the `tkgconfig.yaml` file with the appropriate images and the arguments.
+   You can do this by replacing the [IMAGE_REGISTRY_GOES_HERE] variable with
+   your own image registry.
+
+> Note: remove the brackets [].
+
+6. Deploy the script to a supervisor cluster.
