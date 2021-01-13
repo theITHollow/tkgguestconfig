@@ -31,7 +31,7 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
       shift; VSPHERE_WITH_TANZU_NAMESPACE=$1
       ;;
 
-    -c| --childcluster )
+    -g| --guestcluster )
       shift; TKG_CHILD_CLUSTER=$1
       ;;
 
