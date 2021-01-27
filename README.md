@@ -47,6 +47,18 @@ docker compose push
    You can do this by replacing the [IMAGE_REGISTRY_GOES_HERE] variable with
    your own image registry.
 
+-- Arguments
+
+s, --sup == supervisor cluster endpoint
+u, --user == user
+p, --pass == password
+n, --namespace == supervisor namespace
+g, --guestcluster == guest cluster
+l, --local == local file (for copy purposes)
+d, --destination == remote file location (for copy purposes)
+c, --capath == certificate authority path
+r, --restart == restart a system service
+
 > Note: remove the brackets [].
 
 6. Deploy the script to a supervisor cluster.
