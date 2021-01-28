@@ -5,7 +5,7 @@ metadata:
   name: tkgconfig
 spec:
   containers:
-  - image: eshanks16/clusterconfig:v5 #Change to your new clusterconfig image
+  - image: [IMAGE_REGISTRY_GOES_HERE]/clusterconfig:v1
     name: clusterconfig
     command: [ "/bin/bash", "-c", "--"]
     args: ["/clusterconfig.sh -n utility -g utilitycluster -r
@@ -14,7 +14,7 @@ spec:
       - name: tanzuconfigs
         mountPath: "/tanzuconfigs"
   initContainers:
-  - image: "eshanks16/vlogin:v17" #Change to your new vlogins image
+  - image: [IMAGE_REGISTRY_GOES_HERE]/vlogins:v1
     name: login
     command: [ "/bin/bash", "-c", "--"]
     args: ["/newlogin.sh -s sup.hollow.local -u tanzu -p Test123 -n utility -c

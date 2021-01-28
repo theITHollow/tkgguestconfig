@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  clusterconfig:
+    build: './clusterconfig'
+    image: eshanks16/clusterconfig:version1
+  vlogins:
+    build: './vlogins'
+    image: eshanks16/vlogins:version1
