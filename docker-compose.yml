@@ -3,7 +3,7 @@ version: '3'
 services:
   clusterconfig:
     build: './clusterconfig'
-    image: eshanks16/clusterconfig:version1
+    image: [IMAGE_REGISTRY_GOES_HERE]/clusterconfig:v1
   vlogins:
     build: './vlogins'
-    image: eshanks16/vlogins:version1
+    image: [IMAGE_REGISTRY_GOES_HERE]/vlogins:v1

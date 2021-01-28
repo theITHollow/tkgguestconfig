@@ -5,23 +5,23 @@ metadata:
   name: tkgconfig
 spec:
   containers:
-  - image: [IMAGE_REGISTRY_GOES_HERE]/clusterconfig:v1
+  - image: IMAGE_REGISTRY_GOES_HERE/clusterconfig:v1
     name: clusterconfig
     command: [ "/bin/bash", "-c", "--"]
-    args: ["/clusterconfig.sh -n utility -g utilitycluster -r
-    containerd"] #-n == supervisor namespace, -g guestcluster
+    args: ["/clusterconfig.sh -n SUP_NAMESPACE -g GUEST_CLUSTER"] 
     volumeMounts:
       - name: tanzuconfigs
         mountPath: "/tanzuconfigs"
+    imagePullPolicy: Always
   initContainers:
-  - image: [IMAGE_REGISTRY_GOES_HERE]/vlogins:v1
+  - image: IMAGE_REGISTRY_GOES_HERE/vlogins:v1
     name: login
     command: [ "/bin/bash", "-c", "--"]
-    args: ["/newlogin.sh -s sup.hollow.local -u tanzu -p Test123 -n utility -c
-    utilitycluster"] # -s supervisorendpoint, -u user, -p pass -n namespace -c cluster
+    args: ["/newlogin.sh -s SUPERVISOR_API_ENDPOINT -u USERNAME -p PASSWORD -n SUP_NAMESPACE -g GUEST_CLUSTER"]
     volumeMounts:
       - name: tanzuconfigs
         mountPath: "/tanzuconfigs"
+    imagePullPolicy: Always
   volumes:
     - name: tanzuconfigs
       emptyDir: {}

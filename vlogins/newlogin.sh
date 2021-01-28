@@ -3,13 +3,14 @@
 #Set Default Variables
 VSPHERE_WITH_TANZU_CONTROL_PLANE_IP=${VSPHERE_WITH_TANZU_CONTROL_PLANE_IP:-sup.hollow.local}
 VSPHERE_WITH_TANZU_USERNAME=${VSPHERE_WITH_TANZU_USERNAME:-"tanzu"}
-VSPHERE_WITH_TANZU_PASSWORD=${VSPHERE_WITH_TANZU_PASSWORD:-"Test123"}
+VSPHERE_WITH_TANZU_PASSWORD=${VSPHERE_WITH_TANZU_PASSWORD:-""}
 VSPHERE_WITH_TANZU_NAMESPACE=${VSPHERE_WITH_TANZU_NAMESPACE:-"utility"}
 TKG_CHILD_CLUSTER=${TKG_CHILD_CLUSTER:-"utilitycluster"}
 KUBECONFIG=${KUBECONFIG:-/tanzuconfigs/kubeconfig}
 
 #Specify the KUBECONFIG Location
 export KUBECONFIG=$KUBECONFIG
+echo "KUBECONFIG PATH IS: $KUBECONFIG"
 
 #Check for arguments that override the default variables. Set them if they exist.
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
@@ -52,11 +53,11 @@ send -- \"$VSPHERE_WITH_TANZU_PASSWORD\r\"
 expect eof
 "
 
+
 #echo: "Command results:"
-#echo $KUBECTL_VSPHERE_LOGIN_COMMAND
+echo $KUBECTL_VSPHERE_LOGIN_COMMAND
 
 #Set Context
 #${KUBECTL_PATH} config use-context ${TKG_CHILD_CLUSTER}
-#echo "Cat the KUBECONFIG:"
-#cat $KUBECONFIG
-#sleep 3600
+echo "Cat the KUBECONFIG:"
+cat $KUBECONFIG
