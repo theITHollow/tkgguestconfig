@@ -29,12 +29,12 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
       shift; destination=$1
       ;;
 
-    -g| --gcname )
-      shift; gcname=$1
+    -g| --guestcluster )
+      shift; guestcluster=$1
       ;;
 
-    -s| --svnamespace )
-      shift; svnamespace=$1
+    -n| --namespace )
+      shift; namespace=$1
       ;;
 
     -c| --capath )
@@ -54,7 +54,7 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
 done
 if [[ "$1" == '--' ]]; then shift; fi
 
-if [[ -z "${gcname}" || -z "${svnamespace}" ]]; then
+if [[ -z "${guestcluster}" || -z "${namespace}" ]]; then
   echo "-g and -s are required"
   exit
 elif [[ -n "${capath}" ]]; then
@@ -73,7 +73,7 @@ else
 fi
 
 
-workdir="/tmp/${svnamespace}-${gcname}"
+workdir="/tmp/${namespace}-${guestcluster}"
 mkdir -p ${workdir}
 sshkey=${workdir}/gc-sshkey # path for gc private key
 gckubeconfig=${workdir}/kubeconfig # path for gc kubeconfig
@@ -118,13 +118,13 @@ restart_service() {
 ### Main
 # get guest cluster private key for each node
 export KUBECONFIG=/tanzuconfigs/kubeconfig
-kubectl config use-context ${svnamespace}
-kubectl get secret -n ${svnamespace} ${gcname}"-ssh" -o jsonpath='{.data.ssh-privatekey}' | base64 -d > ${sshkey}
+kubectl config use-context ${namespace}
+kubectl get secret -n ${namespace} ${guestcluster}"-ssh" -o jsonpath='{.data.ssh-privatekey}' | base64 -d > ${sshkey}
 [ $? != 0 ] && echo " please check existence of guest cluster private key secret" && exit
 chmod 600 ${sshkey}
 
 #get guest cluster kubeconfig
-kubectl get secret -n ${svnamespace} ${gcname}"-kubeconfig" -o jsonpath='{.data.value}' | base64 -d > ${gckubeconfig}
+kubectl get secret -n ${namespace} ${guestcluster}"-kubeconfig" -o jsonpath='{.data.value}' | base64 -d > ${gckubeconfig}
 [ $? != 0 ] && echo " please check existence of guest cluster private key secret" && exit
 
 # get IPs of each guest cluster nodes

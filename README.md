@@ -61,4 +61,4 @@ r, --restart == restart a system service
 
 > Note: remove the brackets [].
 
-6. Deploy the script to a supervisor cluster.
+6. Deploy the yaml to a supervisor cluster namespace.
