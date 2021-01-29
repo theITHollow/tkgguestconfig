@@ -9,6 +9,8 @@ Grid child clusters on VMware vSphere 7 with Tanzu.
 TKG guest clusters often need special configurations updated to successfully
 integrate into an environment. Configuring trusted certificates, etc.
 
+For more details about how and why this is necessary visit: [theITHollow.com](https://theithollow.com/2021/02/01/customize-vsphere-7-with-tanzu-guest-clusters/)
+
 ## How
 
 This project uses two containers.
